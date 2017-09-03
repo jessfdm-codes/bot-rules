@@ -1,1 +1,56 @@
-{}
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "https://github.com/thomasfdm/bot-rules/blob/feature-schema/schema/bot-rules-schema.json",
+  "title": "bot-rules JSON Schema",
+  "description": "A file that can be placed on Reddit subreddits to supply voluntary rules to bots operating on them. This schema is maintained at https://github.com/thomasfdm/bot-rules",
+  "type": "object",
+  "properties": {
+    "subreddit": {"type": ["string"]},
+    "contact-moderators": {
+      "type": ["array"],
+      "items": {
+        "type": ["string"]
+      }
+    },
+    "allow-bots": {"type": ["boolean"]},
+    "allow-bots-read": {"type": ["boolean"]},
+    "allow-bots-write": {"type": ["boolean"]},
+    "allow-bots-write-submission": {"type": ["boolean"]},
+    "allow-bots-write-comment": {"type": ["boolean"]}
+  },
+
+  "required": ["allow-bots"],
+
+  "dependencies": {
+    "allow-bots-read": {
+      "properties": {
+        "allow-bots": {
+          "enum": [true]
+        }
+      }
+    },
+
+
+    "allow-bots-write": {
+      "properties": {
+        "allow-bots": {
+          "enum": [true]
+        }
+      }
+    },
+    "allow-bots-write-submission": {
+      "properties": {
+        "allow-bots-write":{
+          "enum": [true]
+        }
+      }
+    },
+    "allow-bots-write-comments": {
+      "properties": {
+        "allow-bots-write": {
+          "enum": [true]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "allow-bots": true,
+  "allow-bots-write": true,
+  "allow-bots-write-comment": true,
+  "allow-bots-write-submission": false
+}
