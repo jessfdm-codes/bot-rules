@@ -1,6 +1,15 @@
 {
-  "allow-bots": true,
-  "allow-bots-write": true,
-  "allow-bots-write-comment": true,
-  "allow-bots-write-submission": false
+  "bots": {
+    "read": {
+      "allow": true
+    },
+    "write": {
+      "comments": {
+        "allow": true
+      },
+      "submissions": {
+        "allow": false
+      }
+    }
+  }
 }

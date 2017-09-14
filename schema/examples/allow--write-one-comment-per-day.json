@@ -1,11 +1,15 @@
 {
   "bots": {
     "read": {
-      "allow": false
+      "allow": true
     },
     "write": {
       "comments": {
-        "allow": false
+        "allow": true,
+        "rate-limiting": [{
+          "amount": 1,
+          "period": "day"
+        }]
       },
       "submissions": {
         "allow": false

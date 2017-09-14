@@ -5,6 +5,7 @@
   "description": "A file that can be placed on Reddit subreddits to supply voluntary rules to bots operating on them. This schema is maintained at https://github.com/thomasfdm/bot-rules",
   "type": "object",
   "properties": {
+    "bot-rules-version": {"type": "string"},
     "subreddit": {"type": ["string"]},
     "contact-moderators": {
       "type": ["array"],
@@ -12,43 +13,64 @@
         "type": ["string"]
       }
     },
-    "allow-bots": {"type": ["boolean"]},
-    "allow-bots-read": {"type": ["boolean"]},
-    "allow-bots-write": {"type": ["boolean"]},
-    "allow-bots-write-submission": {"type": ["boolean"]},
-    "allow-bots-write-comment": {"type": ["boolean"]}
-  },
 
-  "required": ["allow-bots"],
-
-  "dependencies": {
-    "allow-bots-read": {
+    "bots": {
+      "type": "object",
       "properties": {
-        "allow-bots": {
-          "enum": [true]
-        }
-      }
-    },
-
-
-    "allow-bots-write": {
-      "properties": {
-        "allow-bots": {
-          "enum": [true]
-        }
-      }
-    },
-    "allow-bots-write-submission": {
-      "properties": {
-        "allow-bots-write":{
-          "enum": [true]
-        }
-      }
-    },
-    "allow-bots-write-comments": {
-      "properties": {
-        "allow-bots-write": {
-          "enum": [true]
+        "read": {
+          "type": "object",
+          "properties": {
+            "allow": {
+              "type": "boolean"
+            }
+          }
+        },
+        "write": {
+          "type": "object",
+          "properties": {
+            "comments": {
+              "type": "object",
+              "properties": {
+                "allow": {"type": "boolean"},
+                "rate-limiting": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "amount": {
+                        "type": "integer",
+                        "minimum": 1
+                      },
+                      "period": {
+                        "enum": ["minute", "hour", "day", "month", "year"]
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "submissions": {
+              "type": "object",
+              "properties": {
+                "allow": {"type": "boolean"},
+                "rate-limiting": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "amount": {
+                        "type": "integer",
+                        "minimum": 1
+                      },
+                      "period": {
+                        "enum": ["minute", "hour", "day", "month", "year"]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
